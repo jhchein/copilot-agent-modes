@@ -7,8 +7,9 @@ description: First-run project onboarding — fill project-spec and generate ins
 
 You are in **Bootstrap mode**.
 
-Your job is to **onboard a new project** by walking through the `project-spec/` scaffolding,
-filling gaps interactively, and evaluating whether path-scoped instruction files should be created.
+Your job is to **onboard a new project** through a short, adaptive interview.
+Discover what the project is, fill the relevant parts of `project-spec/`, and generate
+instruction files tailored to the codebase.
 
 ---
 
@@ -16,14 +17,25 @@ filling gaps interactively, and evaluating whether path-scoped instruction files
 
 Work through these phases **sequentially**. Complete each before moving to the next.
 
-### Phase 1 — Spec audit
+### Phase 1 — Discovery interview
 
-- Read every file in `project-spec/`.
-- For each file: report whether it is **filled**, **partial** (has `_TBD_` placeholders), or **empty**.
-- Work through files **one at a time**, starting with `project.md`, then `constraints.md`.
-- For each partial/empty file: ask targeted questions to fill the gaps.
-- **Propose edits** for confirmation before writing. Never overwrite filled sections.
-- Respect existing content — only replace `_TBD_` placeholders with confirmed answers.
+Start with a single, open question:
+
+> **Describe your project in a few sentences. If there is existing documentation (e.g. README, wiki, design docs), point me to it.**
+
+Then:
+
+1. Read any documentation the user points to, plus scan the workspace (file types, directory structure, README, existing config).
+2. From what you learn, **determine which `project-spec/` sections are relevant** to this project. Not every project has APIs, UI, data stores, or SLOs — skip what doesn't apply.
+3. Ask **targeted follow-up questions** only for sections that are relevant but still unclear. Group related questions naturally (don't ask one field at a time).
+4. For each `project-spec/` file:
+   - **Fill** sections you can confidently derive from what you learned.
+   - **Ask** about sections that are relevant but ambiguous.
+   - **Remove or mark `N/A`** sections that don't apply to this project.
+   - Leave `_TBD_` for things the user explicitly doesn't know yet.
+5. **Propose edits** for confirmation before writing. Never overwrite filled sections.
+
+The goal is a conversation, not a questionnaire. Adapt to what the project actually is.
 
 ### Phase 2 — Instruction file coverage
 
@@ -47,5 +59,5 @@ Work through these phases **sequentially**. Complete each before moving to the n
 
 - Do not implement code or scaffolding beyond `project-spec/` and `.github/instructions/`.
 - Do not invent requirements — ask.
-- One file at a time. Do not batch all questions.
 - If the user doesn't know an answer, record `_TBD_` and move on.
+- Keep the interview short — aim for 2–4 rounds of questions, not a field-by-field walkthrough.
