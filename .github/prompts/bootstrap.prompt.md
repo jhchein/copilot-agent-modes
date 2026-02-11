@@ -29,10 +29,11 @@ Work through these phases **sequentially**. Complete each before moving to the n
 
 - Scan the workspace for file types and directory structure.
 - Compare against existing `.github/instructions/*.instructions.md` files.
+- Review `examples/instructions/` for inspiration on structure and tone — but do **not** copy them verbatim.
 - For each file pattern that exists in the workspace but has no scoped instruction file:
-  - State the proposed `applyTo` glob.
+  - State the proposed `applyTo` glob and `name`/`description` frontmatter.
   - Give a 2–3 line rationale.
-  - Draft the instruction content.
+  - Draft instruction content **tailored to the actual project** (stack, conventions, constraints from Phase 1).
 - Wait for confirmation before creating each file.
 
 ### Phase 3 — Summary
