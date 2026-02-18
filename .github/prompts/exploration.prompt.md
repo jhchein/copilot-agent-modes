@@ -1,6 +1,9 @@
 ---
 agent: exploration
 description: Exploration mode — generate options, no commitment
+model:
+  - Claude Opus 4.6 (fast mode) (Preview) (copilot)
+  - GPT-5.3-Codex
 ---
 
 # ROLE

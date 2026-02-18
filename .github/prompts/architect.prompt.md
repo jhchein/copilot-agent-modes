@@ -1,6 +1,9 @@
 ---
 agent: architect
 description: Architecture and structure mode — shape before code
+model:
+  - Claude Opus 4.6 (fast mode) (Preview) (copilot)
+  - GPT-5.3-Codex
 ---
 
 # ROLE

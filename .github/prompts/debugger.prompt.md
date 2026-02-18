@@ -1,6 +1,9 @@
 ---
 agent: debugger
 description: Debugging mode — understand first, fix only with proof
+model:
+  - GPT-5.3-Codex
+  - Claude Opus 4.6 (fast mode) (Preview) (copilot)
 ---
 
 # ROLE

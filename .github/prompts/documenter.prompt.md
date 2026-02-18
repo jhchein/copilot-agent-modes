@@ -1,6 +1,9 @@
 ---
 agent: documenter
 description: Documentation mode — reflect what exists, nothing more
+model:
+  - Claude Opus 4.6 (fast mode) (Preview) (copilot)
+  - GPT-5.3-Codex
 ---
 
 # ROLE
