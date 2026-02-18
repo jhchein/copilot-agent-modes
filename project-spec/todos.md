@@ -8,8 +8,8 @@ A prioritized list of open questions and next steps.
 
 ## P1 (next)
 
-- Implement `root-cause-analysis` skill per `project-spec/design/skills-phase1-contract.md` — create `.github/skills/root-cause-analysis/SKILL.md`.
-- Update `README.md` to document skills layer in "What's included" and "Workflow" sections.
+- [x] Implement `root-cause-analysis` skill per `project-spec/design/skills-phase1-contract.md` — create `.github/skills/root-cause-analysis/SKILL.md`.
+- [x] Update `README.md` to document skills layer in "What's included" and "Workflow" sections.
 
 ## P2 (later)
 
