@@ -34,6 +34,13 @@ A ready-to-use set of Copilot prompt files and custom agents that give you **str
 ```text
 .github/
   copilot-instructions.md          # Always-on guardrails (constitutional)
+  agents/                          # Custom agents (workspace-level)
+    thinker.agent.md
+    exploration.agent.md
+    architect.agent.md
+    execution.agent.md
+    debugger.agent.md
+    documenter.agent.md
   prompts/                         # Slash-command modes
     bootstrap.prompt.md            # /bootstrap — first-run onboarding
     thinker.prompt.md              # /thinker  — planning, options as real options
@@ -43,14 +50,6 @@ A ready-to-use set of Copilot prompt files and custom agents that give you **str
     debugger.prompt.md             # /debugger — diagnose, minimal fix only
     documenter.prompt.md           # /documenter — record facts, nothing more
   instructions/                    # Path-scoped rules (empty — created per project)
-.claude/
-  agents/                          # Custom agents (VS Code-compatible Claude format)
-    thinker.md
-    exploration.md
-    architect.md
-    execution.md
-    debugger.md
-    documenter.md
 project-spec/                      # Project-specific source of truth (TBD placeholders)
 examples/instructions/             # Reference instruction files for inspiration
 ```

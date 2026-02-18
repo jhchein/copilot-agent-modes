@@ -10,4 +10,4 @@
 
 These modes are project-independent. Project-specific constraints and contracts live in `project-spec/`.
 Path-scoped instruction files live in `.github/instructions/` — see `examples/instructions/` for reference.
-Custom agent definitions live in `.claude/agents/`.
+Custom agent definitions live in `.github/agents/`.
