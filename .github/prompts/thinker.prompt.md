@@ -1,5 +1,5 @@
 ---
-agent: agent
+agent: thinker
 description: Planning and evaluation mode — explore broadly without committing
 ---
 

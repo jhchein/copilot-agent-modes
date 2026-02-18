@@ -4,7 +4,7 @@
 
 ## What is this?
 
-A ready-to-use set of Copilot prompt files that give you **structured agent modes** (think → explore → architect → execute → debug → document), **always-on guardrails**, and a **project-spec scaffolding** that gets filled interactively.
+A ready-to-use set of Copilot prompt files and custom agents that give you **structured agent modes** (think → explore → architect → execute → debug → document), **always-on guardrails**, and a **project-spec scaffolding** that gets filled interactively.
 
 ## Quick start
 
@@ -18,12 +18,12 @@ A ready-to-use set of Copilot prompt files that give you **structured agent mode
 ```text
 /bootstrap       → onboard project, fill spec, generate instruction files
      ↓
-/thinker         → explore options, no commitment
-/exploration     → divergent thinking, 3–6 options with trade-offs
+/thinker         → run the thinker custom agent
+/exploration     → run the exploration custom agent
      ↓
-/architect       → collapse into one structure, define contracts
+/architect       → run the architect custom agent
      ↓
-/execution       → implement agreed changes
+/execution       → run the execution custom agent
      ↓
 /debugger        → diagnose issues, fix only with proof
 /documenter      → record what exists, nothing more
@@ -34,6 +34,13 @@ A ready-to-use set of Copilot prompt files that give you **structured agent mode
 ```text
 .github/
   copilot-instructions.md          # Always-on guardrails (constitutional)
+  agents/                          # Custom agents (workspace-level)
+    thinker.agent.md
+    exploration.agent.md
+    architect.agent.md
+    execution.agent.md
+    debugger.agent.md
+    documenter.agent.md
   prompts/                         # Slash-command modes
     bootstrap.prompt.md            # /bootstrap — first-run onboarding
     thinker.prompt.md              # /thinker  — planning, options as real options
@@ -46,6 +53,21 @@ A ready-to-use set of Copilot prompt files that give you **structured agent mode
 project-spec/                      # Project-specific source of truth (TBD placeholders)
 examples/instructions/             # Reference instruction files for inspiration
 ```
+
+## Prompt files vs custom agents
+
+- **Custom agents** hold role behavior and optional handoffs.
+- **Prompt files** stay as ergonomic slash commands and select the right custom agent (`agent: <name>`).
+- Keep always-on constraints in `.github/copilot-instructions.md`; keep project-specific truth in `project-spec/`.
+
+## Handoff patterns
+
+- **thinker → exploration**: broaden possibilities before narrowing.
+- **exploration → architect**: collapse options into one coherent structure.
+- **architect → execution**: implement only after boundaries and contracts are explicit.
+- **execution → debugger**: switch to diagnosis-first mode when uncertainty appears.
+- **execution → documenter**: record outcomes and decisions once work lands.
+- **debugger → execution**: apply a minimal fix only after root-cause confidence is high.
 
 ## Design principles
 

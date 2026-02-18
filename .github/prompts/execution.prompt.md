@@ -1,5 +1,5 @@
 ---
-agent: agent
+agent: execution
 description: Execution mode — Implement decisions
 ---
 

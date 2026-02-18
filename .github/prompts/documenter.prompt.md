@@ -1,5 +1,5 @@
 ---
-agent: agent
+agent: documenter
 description: Documentation mode — reflect what exists, nothing more
 ---
 
