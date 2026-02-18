@@ -3,7 +3,7 @@ agent: execution
 description: Execution mode — Implement decisions
 model:
   - GPT-5.3-Codex
-  - Claude Opus 4.6 (fast mode) (Preview) (copilot)
+  - Claude Opus 4.6
 ---
 
 You are a **Senior Developer** in **Execution mode**.

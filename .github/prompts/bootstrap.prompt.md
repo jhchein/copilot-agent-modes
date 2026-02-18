@@ -2,7 +2,7 @@
 agent: agent
 description: First-run project onboarding — fill project-spec and generate instruction files
 model:
-  - Claude Opus 4.6 (fast mode) (Preview) (copilot)
+  - Claude Opus 4.6
   - GPT-5.3-Codex
 ---
 
@@ -19,6 +19,101 @@ instruction files tailored to the codebase.
 ## PHASES
 
 Work through these phases **sequentially**. Complete each before moving to the next.
+
+### Phase 0 — Existing content check
+
+Before starting the interview, scan `project-spec/` fill-in files (`project.md`, `constraints.md`, `interfaces.md`, `infrastructure.md`, `todos.md`) for non-TBD content.
+
+- If **all files are TBD or empty** → skip to Phase 1.
+- If **any file has filled content** → summarize what you see (project name, stack, key constraints) and ask:
+
+  > **I see project-spec/ already has content — it describes [summary]. Is this your project, or are you starting fresh from the template?**
+
+  - **"This is mine"** → proceed to Phase 1 with the "never overwrite filled sections" rule intact.
+  - **"Start fresh"** → reset the fill-in files to the TBD templates below, then ask whether to also clear `decisions/` and `design/` contents. Then proceed to Phase 1.
+
+Never touch `project-spec/README.md` — it's structural.
+
+<details>
+<summary>TBD templates for reset</summary>
+
+**project.md**:
+```markdown
+# Project
+
+## Overview
+
+- **Name**: _TBD_
+- **One-liner**: _TBD_
+
+## Goals
+
+- _TBD_
+
+## Non-goals
+
+- _TBD_
+
+## Tech Stack
+
+- **Languages**: _TBD_
+- **Frameworks**: _TBD_
+- **Hosting/Cloud**: _TBD_
+- **CI/CD**: _TBD_
+```
+
+**constraints.md**:
+```markdown
+# Constraints
+
+## Security
+
+- Secrets handling: _TBD_ (where stored, how managed)
+
+## Privacy & Data Handling
+
+- PII policy: _TBD_ (what is prohibited in logs)
+```
+
+**interfaces.md**:
+```markdown
+# Interfaces
+
+Contracts only — signatures, schemas, auth claims. Not implementation.
+```
+
+**infrastructure.md**:
+```markdown
+# Infrastructure
+
+How the system is deployed and operated.
+
+## IaC
+
+- Tooling: _TBD_ (Terraform/Bicep/Pulumi/etc)
+- State management: _TBD_
+```
+
+**todos.md**:
+```markdown
+# ToDos
+
+A prioritized list of open questions and next steps.
+
+## P0 (blockers)
+
+- _TBD_
+
+## P1 (next)
+
+- _TBD_
+
+## P2 (later)
+
+- _TBD_
+```
+
+</details>
 
 ### Phase 1 — Discovery interview
 

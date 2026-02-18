@@ -8,8 +8,8 @@ A prioritized list of open questions and next steps.
 
 ## P1 (next)
 
-- [x] Implement `root-cause-analysis` skill per `project-spec/design/skills-phase1-contract.md` — create `.github/skills/root-cause-analysis/SKILL.md`.
-- [x] Update `README.md` to document skills layer in "What's included" and "Workflow" sections.
+- [ ] Implement bootstrap Phase 0 (existing content detection) per `project-spec/decisions/2026-02-18/bootstrap-existing-content-detection.md`.
+- [ ] Add example `project-spec/` content to `examples/` (illustrative project archetypes, not this project's specs).
 
 ## P2 (later)
 
