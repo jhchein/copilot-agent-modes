@@ -27,6 +27,9 @@ A ready-to-use set of Copilot prompt files and custom agents that give you **str
      ↓
 /debugger        → diagnose issues, fix only with proof
 /documenter      → record what exists, nothing more
+
+Skills (auto-loaded when relevant or via slash command):
+  /root-cause-analysis → structured diagnostic procedure
 ```
 
 ## What's included
@@ -49,6 +52,9 @@ A ready-to-use set of Copilot prompt files and custom agents that give you **str
     execution.prompt.md            # /execution — implement agreed changes
     debugger.prompt.md             # /debugger — diagnose, minimal fix only
     documenter.prompt.md           # /documenter — record facts, nothing more
+  skills/                          # Reusable workflows (auto-discovered)
+    root-cause-analysis/           # Structured diagnostic procedure
+      SKILL.md
   instructions/                    # Path-scoped rules (empty — created per project)
 project-spec/                      # Project-specific source of truth (TBD placeholders)
 examples/instructions/             # Reference instruction files for inspiration
