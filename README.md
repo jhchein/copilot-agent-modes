@@ -62,9 +62,36 @@ examples/instructions/             # Reference instruction files for inspiration
 
 ## Prompt files vs custom agents
 
-- **Custom agents** hold role behavior and optional handoffs.
-- **Prompt files** stay as ergonomic slash commands and select the right custom agent (`agent: <name>`).
-- Keep always-on constraints in `.github/copilot-instructions.md`; keep project-specific truth in `project-spec/`.
+Each mode has two files: an **agent** (`.github/agents/<name>.agent.md`) and a **prompt** (`.github/prompts/<name>.prompt.md`). They have different responsibilities:
+
+| Layer      | Responsibility                                                                     | When it runs                                                              |
+| ---------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **Agent**  | Complete behavioral definition — role, rules, constraints, handoffs                | Always: direct selection, subagent invocation, cloud/background execution |
+| **Prompt** | Ergonomic slash-command wrapper — selects the agent, may add task-specific context | Only when the user invokes the `/` command                                |
+
+**Agents must be self-sufficient.** An agent should behave correctly when selected directly from the agents dropdown, without the corresponding prompt file. The prompt is a convenience, not a safety layer.
+
+**Prompts select agents, not the other way around.** Each prompt uses `agent: <name>` in frontmatter to activate its agent. The prompt body adds task-specific framing (e.g., additional guidelines or context) on top of the agent's own instructions.
+
+Keep always-on constraints in `.github/copilot-instructions.md`; keep project-specific truth in `project-spec/`.
+
+## Delegation model: handoffs, not subagents
+
+This repo uses **handoffs** as its delegation pattern. Handoffs are user-controlled transitions: after a chat response, a button appears that lets the user switch to the next agent with relevant context.
+
+**Why handoffs:**
+
+- The user reviews and approves every agent transition.
+- Each transition is visible and steerable.
+- The user is the orchestrator.
+
+**Why not subagents:**
+
+- Subagents are agent-controlled delegations that happen within a single turn — the agent decides when to delegate, not the user.
+- Prompt files don't compose with subagents. When agent A invokes agent B as a subagent, only B's agent file runs — the prompt file is bypassed. This means any task-specific framing in prompts is invisible to subagents.
+- Mixing both models (some transitions user-controlled, some autonomous) creates ambiguity about who controls the workflow.
+
+The handoff pattern is deliberate, not a gap. A coordinator agent with subagent delegation may be added later, but only once repeated manual chaining demonstrates clear need (see `project-spec/constraints.md`).
 
 ## Handoff patterns
 
@@ -78,7 +105,9 @@ examples/instructions/             # Reference instruction files for inspiration
 ## Design principles
 
 - **Always-on instructions are a constitution**, not a playbook — short, behavioral, every token earns its place.
-- **Prompt files are modes**, invoked via slash commands — each has a clear scope and boundary.
+- **Agents are the behavioral layer** — each carries the complete role definition and works in all invocation contexts (dropdown, subagent, cloud).
+- **Prompt files are the ergonomic layer** — slash commands that select the right agent and optionally add task-specific context.
+- **Handoffs are the delegation layer** — user-controlled transitions between agents with suggested next steps.
 - **Instruction files are path-scoped rules**, auto-applied by file pattern — generated per project by `/bootstrap`.
 - **Project-spec is the only project-specific content** — everything else is reusable across projects.
 
