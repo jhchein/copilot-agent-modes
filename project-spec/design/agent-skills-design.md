@@ -42,29 +42,30 @@ It follows VS Code Agent Skills guidance (`.github/skills/<skill-name>/SKILL.md`
 - **fact-only-docs** (auto-load): write docs from code/spec/approved decisions only.
 - **decision-log-format** (manual + auto): consistent decisions/open-questions format.
 
-## Suggested initial skill rollout (minimal)
+## Suggested initial skill rollout
 
-Start with four skills only, then expand:
+Start with one skill that teaches a genuine capability the agent prompts cannot fully encode:
 
-1. `constraint-check`
-2. `minimal-change-delivery`
-3. `root-cause-analysis`
-4. `fact-only-docs`
+1. `root-cause-analysis` — structured diagnostic procedure (fact gathering → hypothesis ranking → targeted verification → conditional fix)
 
-This gives immediate quality and safety benefits with low maintenance overhead.
+See `project-spec/design/skills-phase1-contract.md` for the full execution contract.
+
+### Deferred skills
+
+Three originally-proposed skills are **deferred until observed failures justify them**:
+
+- `constraint-check` — agent prompts already enforce constraint awareness; no observed misses
+- `minimal-change-delivery` — agent prompts already enforce scope discipline; no observed over-scoping
+- `fact-only-docs` — agent prompts already enforce factual documentation; no observed fabrication
+
+These are guardrails restating existing directives, not capabilities. They may be revisited if concrete, repeatable failures demonstrate the agent prompts are insufficient. The remaining 8 skills in the skill map above are also deferred — they are design ideas, not committed work.
 
 ## Proposed directory structure
 
 ```text
 .github/
   skills/
-    constraint-check/
-      SKILL.md
-    minimal-change-delivery/
-      SKILL.md
     root-cause-analysis/
-      SKILL.md
-    fact-only-docs/
       SKILL.md
 ```
 
