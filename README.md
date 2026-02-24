@@ -2,9 +2,11 @@
 
 > Opinionated, project-independent agent modes for GitHub Copilot — copy into your repo, run `/bootstrap`, start building.
 
-## What is this?
+## Why
 
-A ready-to-use set of Copilot prompt files and custom agents that give you **structured agent modes** (think → explore → architect → execute → debug → document), an **evaluation mode** (`evaluator`), **always-on guardrails**, and a **project-spec scaffolding** that gets filled interactively.
+Copilot is capable but unstructured. Without guardrails, planning drifts into implementation, debugging becomes refactoring, and scope creeps silently. This template gives you distinct modes that keep different kinds of work separated — so each phase gets the right constraints, and handoffs between phases are explicit.
+
+Copy the files, bootstrap your project context, start working.
 
 ## Quick start
 
@@ -18,19 +20,19 @@ A ready-to-use set of Copilot prompt files and custom agents that give you **str
 ```text
 /bootstrap       → onboard project, fill spec, generate instruction files
      ↓
-/thinker         → run the thinker custom agent
-/exploration     → run the exploration custom agent
+/thinker         → plan, weigh options, evaluate decisions
+/exploration     → generate 3–6 options with trade-offs
      ↓
-/architect       → run the architect custom agent
+/architect       → define structure, contracts, boundaries
      ↓
-/execution       → run the execution custom agent
+/execution       → implement agreed changes, minimal scope
      ↓
 /debugger        → diagnose issues, fix only with proof
 /documenter      → record what exists, nothing more
 
-/evaluator       → cross-cutting review mode: score artifacts against scenario constraints at any stage
+/evaluator       → score artifacts against scenario constraints (any stage)
 
-Skills (auto-loaded when relevant or via slash command):
+Skills (auto-loaded when relevant):
   /root-cause-analysis → structured diagnostic procedure
 ```
 
@@ -69,60 +71,30 @@ examples/scenarios/                # Evaluation harness pattern references
 examples/skills/                   # Optional skill examples (e.g., writing-quality)
 ```
 
-## Prompt files vs custom agents
+## How it works
 
-Each mode has two files: an **agent** (`.github/agents/<name>.agent.md`) and a **prompt** (`.github/prompts/<name>.prompt.md`). They have different responsibilities:
+Each mode has two files: an **agent** and a **prompt**.
 
-| Layer      | Responsibility                                                                     | When it runs                                                              |
-| ---------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Agent**  | Complete behavioral definition — role, rules, constraints, handoffs                | Always: direct selection, subagent invocation, cloud/background execution |
-| **Prompt** | Ergonomic slash-command wrapper — selects the agent, may add task-specific context | Only when the user invokes the `/` command                                |
+- **Agents** (`.github/agents/*.agent.md`) carry the complete behavioral definition — role, rules, constraints, handoffs. They work in every context: the agent dropdown, subagent invocation, and cloud/background execution. Agents must be self-sufficient.
+- **Prompts** (`.github/prompts/*.prompt.md`) are slash-command wrappers. Each prompt selects an agent via frontmatter and optionally adds task-specific context. Prompts are a convenience, not a safety layer.
 
-**Agents must be self-sufficient.** An agent should behave correctly when selected directly from the agents dropdown, without the corresponding prompt file. The prompt is a convenience, not a safety layer.
+**You control transitions.** When an agent finishes, it suggests a handoff — a button that switches to the next agent with context. You decide whether to follow. The flow typically runs: thinker → exploration → architect → execution → documenter, with debugger available when issues appear and evaluator available at any stage.
 
-**Prompts select agents, not the other way around.** Each prompt uses `agent: <name>` in frontmatter to activate its agent. The prompt body adds task-specific framing (e.g., additional guidelines or context) on top of the agent's own instructions.
+**Always-on guardrails** in `.github/copilot-instructions.md` apply to every agent, every turn. They're short and behavioral — the constitution, not the playbook.
 
-Keep always-on constraints in `.github/copilot-instructions.md`; keep project-specific truth in `project-spec/`.
+**Project-spec is your project's source of truth.** Everything in `project-spec/` is specific to your project. Everything else in the template is reusable across repos.
 
-## Delegation model: handoffs, not subagents
+For the full delegation rationale (why handoffs over subagents, exception criteria, design principles), see `docs/delegation-model.md`.
 
-This repo uses **handoffs** as its delegation pattern. Handoffs are user-controlled transitions: after a chat response, a button appears that lets the user switch to the next agent with relevant context.
+## Optional patterns
 
-**Why handoffs:**
+Beyond the base modes, the template includes optional patterns you can adopt incrementally:
 
-- The user reviews and approves every agent transition.
-- Each transition is visible and steerable.
-- The user is the orchestrator.
+- **Writing quality** — instruction file + skill for consistent, evidence-based documentation.
+- **Evaluation harness** — persona-based scenario review using the evaluator agent.
+- **Project-spec hygiene** — instruction file enforcing `_TBD_` conventions and fact-only content.
 
-**Why not subagents (by default):**
-
-- Subagents are agent-controlled delegations that happen within a single turn — the agent decides when to delegate, not the user.
-- Prompt files don't compose with subagents. When agent A invokes agent B as a subagent, only B's agent file runs — the prompt file is bypassed. This means any task-specific framing in prompts is invisible to subagents.
-- Mixing both models (some transitions user-controlled, some autonomous) creates ambiguity about who controls the workflow.
-
-**One exception: execution → debugger.** The execution agent declares debugger as a subagent because error diagnosis during implementation is high-frequency and non-destructive (the debugger diagnoses but does not modify code). This enables autonomous diagnosis during coding agent and background execution, where no user is present for a handoff. The handoff remains available for interactive use. See `project-spec/decisions/2026-02-24/execution-debugger-subagent-exception.md`.
-
-Future subagent exceptions require a decision record and must meet three criteria: high-frequency, non-destructive, and same-direction (no circular delegation). The handoff-first model remains the default.
-
-## Handoff patterns
-
-- **thinker → exploration**: broaden possibilities before narrowing.
-- **exploration → architect**: collapse options into one coherent structure.
-- **architect → execution**: implement only after boundaries and contracts are explicit.
-- **execution → debugger**: switch to diagnosis-first mode when uncertainty appears.
-- **execution → documenter**: record outcomes and decisions once work lands.
-- **debugger → execution**: apply a minimal fix only after root-cause confidence is high.
-- **evaluator → execution**: rework blocking findings with minimal, reversible edits.
-- **evaluator → thinker**: reframe unresolved risks as options and decision questions.
-
-## Design principles
-
-- **Always-on instructions are a constitution**, not a playbook — short, behavioral, every token earns its place.
-- **Agents are the behavioral layer** — each carries the complete role definition and works in all invocation contexts (dropdown, subagent, cloud).
-- **Prompt files are the ergonomic layer** — slash commands that select the right agent and optionally add task-specific context.
-- **Handoffs are the delegation layer** — user-controlled transitions between agents with suggested next steps.
-- **Instruction files are path-scoped rules**, auto-applied by file pattern — generated per project by `/bootstrap`.
-- **Project-spec is the only project-specific content** — everything else is reusable across projects.
+`/bootstrap` offers these based on your project context. See `examples/` for reference files and templates.
 
 ## Customizing
 
