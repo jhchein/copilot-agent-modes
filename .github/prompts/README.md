@@ -7,6 +7,13 @@
 - If you want code → /execution (custom agent: `execution`)
 - If you want truth → /documenter (custom agent: `documenter`)
 - If you want root cause → /debugger (custom agent: `debugger`)
+- If you want scenario evaluation → /evaluator (custom agent: `evaluator`)
+
+Optional patterns are scaffolded by `/bootstrap` when needed:
+
+- Writing Quality Pattern (docs-focused instruction + skill + optional prompt wiring)
+- Evaluation Harness Pattern (persona-based review prompts and scenario files)
+- Project-Spec Hygiene Pattern (`project-spec` maintenance instruction)
 
 These modes are project-independent. Project-specific constraints and contracts live in `project-spec/`.
 Path-scoped instruction files live in `.github/instructions/` — see `examples/instructions/` for reference.

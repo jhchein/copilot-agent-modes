@@ -5,18 +5,19 @@ All prompts and instruction templates reference `project-spec/` — nothing proj
 
 ## How to use
 
-Run `/bootstrap` in GitHub Copilot Chat. It starts with one open question, scans your workspace, and fills only the sections relevant to your project. Sections that don't apply are removed or marked N/A.
+Run `/bootstrap` in GitHub Copilot Chat. It walks through key files, asks targeted questions, and fills only sections relevant to your project. Sections that do not apply are removed or marked `N/A`.
 
 Or fill manually:
 
 1. Start with the essentials:
    - `project.md` — goals, stack, non-goals
-   - `constraints.md` — security, privacy
+   - `constraints.md` — security, privacy, networking
    - `todos.md` — open questions and next steps
 2. Add detail as the project stabilizes:
    - `interfaces.md` — API/auth contracts (if applicable)
    - `infrastructure.md` — cloud/IaC conventions (if applicable)
    - `decisions/` — architectural decisions (one file per decision)
+   - `scenarios/` — optional evaluation holdout set (persona-based review inputs)
 
 Templates are intentionally minimal. `/bootstrap` adds sections dynamically based on what your project actually needs.
 

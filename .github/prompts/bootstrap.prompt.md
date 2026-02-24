@@ -146,6 +146,62 @@ The goal is a conversation, not a questionnaire. Adapt to what the project actua
   - Draft instruction content **tailored to the actual project** (stack, conventions, constraints from Phase 1).
 - Wait for confirmation before creating each file.
 
+### Phase 2.5 — Optional pattern proposals
+
+After Phase 2, offer optional patterns the user can enable explicitly.
+
+Keep these patterns **off by default**.
+
+#### Writing Quality Pattern
+
+Propose this when the repo has a `docs/` directory or substantial markdown docs.
+
+On user confirmation, generate:
+
+- `.github/instructions/writing.instructions.md` (based on `examples/instructions/writing.instructions.md`)
+- `.github/skills/writing-quality/SKILL.md` (based on `examples/skills/writing-quality/SKILL.md`)
+- Prompt wiring:
+  - always: `.github/prompts/documenter.prompt.md`
+  - optional: `.github/prompts/architect.prompt.md`, `.github/prompts/execution.prompt.md`
+
+#### Evaluation Harness Pattern
+
+Propose this when the user mentions stakeholder alignment, review sign-off, or persona-based validation.
+
+On user confirmation, generate:
+
+- `project-spec/scenarios/` with one persona file per stakeholder
+- A lightweight evaluator agent at `.github/agents/evaluator.agent.md`
+- One review prompt per persona at `.github/prompts/<persona>.prompt.md`
+
+When generating scenarios, ask for 2-4 stakeholders and capture:
+
+- role
+- decision concerns
+- risk tolerance
+- review focus
+- scoring dimensions (authoritative rubric)
+
+When generating persona prompts, reference scenario `Scoring dimensions` rather than duplicating dimension text in prompts.
+
+Use `examples/scenarios/` templates as starting points and adapt to the user's project.
+
+#### Project-Spec Hygiene Pattern
+
+Propose this when users want stricter consistency in `project-spec/` maintenance.
+
+On user confirmation, generate:
+
+- `.github/instructions/project-spec.instructions.md`
+
+---
+
+For each optional pattern proposal:
+
+- Explain what files will be created.
+- Explain the value and the ongoing maintenance cost in 1-2 lines.
+- Wait for explicit user confirmation before writing.
+
 ### Phase 3 — Summary
 
 - Print a checklist: what was filled, what was created, what remains `_TBD_`.
@@ -155,7 +211,8 @@ The goal is a conversation, not a questionnaire. Adapt to what the project actua
 
 ## RULES
 
-- Do not implement code or scaffolding beyond `project-spec/` and `.github/instructions/`.
+- Do not implement runtime code or app scaffolding.
+- In bootstrap mode, only edit `project-spec/`, `.github/instructions/`, `.github/skills/`, `.github/prompts/`, and `.github/agents/` when explicitly confirmed by the user.
 - Do not invent requirements — ask.
 - If the user doesn't know an answer, record `_TBD_` and move on.
 - Keep the interview short — aim for 2–4 rounds of questions, not a field-by-field walkthrough.

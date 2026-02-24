@@ -4,12 +4,12 @@
 
 ## What is this?
 
-A ready-to-use set of Copilot prompt files and custom agents that give you **structured agent modes** (think → explore → architect → execute → debug → document), **always-on guardrails**, and a **project-spec scaffolding** that gets filled interactively.
+A ready-to-use set of Copilot prompt files and custom agents that give you **structured agent modes** (think → explore → architect → execute → debug → document), an **evaluation mode** (`evaluator`), **always-on guardrails**, and a **project-spec scaffolding** that gets filled interactively.
 
 ## Quick start
 
 1. Use this template (or copy `.github/` and `project-spec/` into your repo).
-2. Open Copilot Chat and run `/bootstrap`.
+2. Open Copilot Chat and run `/bootstrap` — tell it about your project in the same message (e.g., "/bootstrap this project is a Node.js API that does X, the code lives in src/").
 3. Answer the questions — it fills `project-spec/` and generates instruction files tailored to your codebase.
 4. Use the modes as you work.
 
@@ -28,6 +28,8 @@ A ready-to-use set of Copilot prompt files and custom agents that give you **str
 /debugger        → diagnose issues, fix only with proof
 /documenter      → record what exists, nothing more
 
+/evaluator       → cross-cutting review mode: score artifacts against scenario constraints at any stage
+
 Skills (auto-loaded when relevant or via slash command):
   /root-cause-analysis → structured diagnostic procedure
 ```
@@ -44,6 +46,7 @@ Skills (auto-loaded when relevant or via slash command):
     execution.agent.md
     debugger.agent.md
     documenter.agent.md
+    evaluator.agent.md
   prompts/                         # Slash-command modes
     bootstrap.prompt.md            # /bootstrap — first-run onboarding
     thinker.prompt.md              # /thinker  — planning, options as real options
@@ -52,12 +55,18 @@ Skills (auto-loaded when relevant or via slash command):
     execution.prompt.md            # /execution — implement agreed changes
     debugger.prompt.md             # /debugger — diagnose, minimal fix only
     documenter.prompt.md           # /documenter — record facts, nothing more
+    evaluator.prompt.md            # /evaluator — scenario-based evaluation runner
+    new-adopter.prompt.md          # /new-adopter — evaluate from adopter perspective
+    template-contributor.prompt.md # /template-contributor — evaluate from maintainer perspective
   skills/                          # Reusable workflows (auto-discovered)
     root-cause-analysis/           # Structured diagnostic procedure
       SKILL.md
   instructions/                    # Path-scoped rules (empty — created per project)
 project-spec/                      # Project-specific source of truth (TBD placeholders)
+  scenarios/                       # Active evaluation scenarios for this repo
 examples/instructions/             # Reference instruction files for inspiration
+examples/scenarios/                # Evaluation harness pattern references
+examples/skills/                   # Optional skill examples (e.g., writing-quality)
 ```
 
 ## Prompt files vs custom agents
@@ -85,13 +94,15 @@ This repo uses **handoffs** as its delegation pattern. Handoffs are user-control
 - Each transition is visible and steerable.
 - The user is the orchestrator.
 
-**Why not subagents:**
+**Why not subagents (by default):**
 
 - Subagents are agent-controlled delegations that happen within a single turn — the agent decides when to delegate, not the user.
 - Prompt files don't compose with subagents. When agent A invokes agent B as a subagent, only B's agent file runs — the prompt file is bypassed. This means any task-specific framing in prompts is invisible to subagents.
 - Mixing both models (some transitions user-controlled, some autonomous) creates ambiguity about who controls the workflow.
 
-The handoff pattern is deliberate, not a gap. A coordinator agent with subagent delegation may be added later, but only once repeated manual chaining demonstrates clear need (see `project-spec/constraints.md`).
+**One exception: execution → debugger.** The execution agent declares debugger as a subagent because error diagnosis during implementation is high-frequency and non-destructive (the debugger diagnoses but does not modify code). This enables autonomous diagnosis during coding agent and background execution, where no user is present for a handoff. The handoff remains available for interactive use. See `project-spec/decisions/2026-02-24/execution-debugger-subagent-exception.md`.
+
+Future subagent exceptions require a decision record and must meet three criteria: high-frequency, non-destructive, and same-direction (no circular delegation). The handoff-first model remains the default.
 
 ## Handoff patterns
 
@@ -101,6 +112,8 @@ The handoff pattern is deliberate, not a gap. A coordinator agent with subagent 
 - **execution → debugger**: switch to diagnosis-first mode when uncertainty appears.
 - **execution → documenter**: record outcomes and decisions once work lands.
 - **debugger → execution**: apply a minimal fix only after root-cause confidence is high.
+- **evaluator → execution**: rework blocking findings with minimal, reversible edits.
+- **evaluator → thinker**: reframe unresolved risks as options and decision questions.
 
 ## Design principles
 

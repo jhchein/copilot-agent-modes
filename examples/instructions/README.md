@@ -14,8 +14,23 @@ Or run `/bootstrap` in Copilot Chat — it will scan your workspace and propose 
 
 ## Examples
 
-| File                        | Scope                                | Purpose                                 |
-| --------------------------- | ------------------------------------ | --------------------------------------- |
-| `api.instructions.md`       | `src/api/**/*.py`                    | API contracts, auth, observability      |
-| `ingestion.instructions.md` | `src/ingestion/**/*.py`              | Data pipelines, storage layout          |
-| `terraform.instructions.md` | `infra/**/*.tf`, `infra/**/*.tfvars` | IaC provider config, naming, networking |
+| File                           | Scope                                | Purpose                                          |
+| ------------------------------ | ------------------------------------ | ------------------------------------------------ |
+| `api.instructions.md`          | `src/api/**/*.py`                    | API contracts, auth, observability               |
+| `ingestion.instructions.md`    | `src/ingestion/**/*.py`              | Data pipelines, storage layout                   |
+| `project-spec.instructions.md` | `project-spec/**/*.md`               | Project-spec consistency and placeholder hygiene |
+| `terraform.instructions.md`    | `infra/**/*.tf`, `infra/**/*.tfvars` | IaC provider config, naming, networking          |
+| `writing.instructions.md`      | `docs/**/*.md`                       | Outward-facing documentation quality             |
+
+## Optional patterns
+
+- **Writing Quality Pattern**:
+  - `examples/instructions/writing.instructions.md`
+  - `examples/skills/writing-quality/SKILL.md`
+  - Optional prompt wiring in `documenter.prompt.md` (and optionally `architect.prompt.md`, `execution.prompt.md`)
+- **Evaluation Harness Pattern**:
+  - `examples/scenarios/persona.template.md`
+  - `examples/scenarios/review.prompt.template.md`
+  - `examples/scenarios/evaluator.agent.template.md`
+- **Project-Spec Hygiene Pattern**:
+  - `examples/instructions/project-spec.instructions.md`
