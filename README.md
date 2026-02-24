@@ -11,7 +11,7 @@ Copy the files, bootstrap your project context, start working.
 ## Quick start
 
 1. Use this template (or copy `.github/` and `project-spec/` into your repo).
-2. Open Copilot Chat and run `/bootstrap` — tell it about your project in the same message (e.g., "/bootstrap this project is a Node.js API that does X, the code lives in src/").
+2. Open Copilot Chat and run `/bootstrap` — tell it about your project in the same message (e.g., "/bootstrap this project is a Node.js API that does X, the code lives in src/"). Slash commands like `/bootstrap` are registered automatically from `.github/prompts/` — no extension or setup required beyond Copilot Chat.
 3. Answer the questions — it fills `project-spec/` and generates instruction files tailored to your codebase.
 4. Use the modes as you work.
 

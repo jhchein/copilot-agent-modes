@@ -1,5 +1,7 @@
 # VS Code Copilot 2026 Update Suggestions
 
+> **Status (2026-02-24):** §2 skill baseline superseded by `project-spec/decisions/2026-02-18/skills-layering-model.md` (ship 1, defer 3). §3 tool allowlists deferred to Phase 2 (no decision record yet).
+
 This note summarizes relevant recent customization features and recommends how this repo should stay current.
 
 ## Relevant current features
