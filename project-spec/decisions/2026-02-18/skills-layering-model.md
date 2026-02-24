@@ -15,5 +15,5 @@
   - _Use custom instructions instead of skills for guardrails_: Still available as an option if guardrail needs emerge.
   - _Wire skills into agent frontmatter_: Not possible — VS Code has no `skills:` key on agents. Skills discovery is model-driven by design.
   - _Trim agent prompts to defer to skills_: Rejected — agent prompts must stand alone because skills may not fire. Trimming would weaken the baseline.
-- **Consequences**: One new skill directory (`.github/skills/root-cause-analysis/`). No changes to existing agent or prompt files. Activation quality must be monitored per evaluation criteria in `skills-phase1-contract.md`. Guardrail skills may be added later if failures justify them.
+- **Consequences**: One new skill directory (`.github/skills/root-cause-analysis/`). No changes to existing agent or prompt files. Activation quality must be monitored per evaluation criteria in `docs/design/skills-phase1-contract.md`. Guardrail skills may be added later if failures justify them.
 - **Reversibility**: Two-way door. Skills are just files — deleting a skill directory fully removes it with no side effects on agents or prompts.

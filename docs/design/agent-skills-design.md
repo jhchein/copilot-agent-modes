@@ -48,7 +48,7 @@ Start with one skill that teaches a genuine capability the agent prompts cannot 
 
 1. `root-cause-analysis` — structured diagnostic procedure (fact gathering → hypothesis ranking → targeted verification → conditional fix)
 
-See `project-spec/design/skills-phase1-contract.md` for the full execution contract.
+See `docs/design/skills-phase1-contract.md` for the full execution contract.
 
 ### Deferred skills
 

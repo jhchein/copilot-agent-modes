@@ -5,7 +5,7 @@ Date: 2026-02-18 (revised: scope reduced from 4 skills to 1)
 
 ## Context
 
-`project-spec/design/agent-skills-design.md` originally identified 4 baseline skills. After architecture review, 3 were identified as guardrails restating existing agent prompt directives without solving an observed problem. Phase 1 is reduced to the single skill that teaches a genuine capability: `root-cause-analysis`.
+`docs/design/agent-skills-design.md` originally identified 4 baseline skills. After architecture review, 3 were identified as guardrails restating existing agent prompt directives without solving an observed problem. Phase 1 is reduced to the single skill that teaches a genuine capability: `root-cause-analysis`.
 
 This document specifies exactly what execution should produce, based on research of the [Agent Skills specification](https://agentskills.io/specification) and [VS Code agent skills docs](https://code.visualstudio.com/docs/copilot/customization/agent-skills) (approved 2026-02-04).
 
