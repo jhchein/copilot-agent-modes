@@ -9,7 +9,7 @@
 - If you want root cause → /debugger (custom agent: `debugger`)
 - If you want scenario evaluation → /evaluator (custom agent: `evaluator`)
 
-Optional patterns are scaffolded by `/bootstrap` when needed:
+Optional patterns are offered by `/bootstrap` when context suggests they'd be useful — not enabled by default:
 
 - Writing Quality Pattern (docs-focused instruction + skill + optional prompt wiring)
 - Evaluation Harness Pattern (persona-based review prompts and scenario files)

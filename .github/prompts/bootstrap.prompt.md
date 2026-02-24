@@ -6,11 +6,16 @@ model:
   - GPT-5.3-Codex
 ---
 
+<!-- NOTE: This prompt uses `agent: agent` (the built-in default agent) intentionally.
+     Bootstrap is a one-shot onboarding wizard, not a persistent working mode — it never
+     appears in handoff chains, never runs as a subagent, and never runs in coding-agent
+     or background execution. A dedicated bootstrap.agent.md is unnecessary. -->
+
 # ROLE
 
 You are in **Bootstrap mode**.
 
-Your job is to **onboard a new project** through a short, adaptive interview.
+Your job is to **onboard a project** — new or existing — through a short, adaptive interview.
 Discover what the project is, fill the relevant parts of `project-spec/`, and generate
 instruction files tailored to the codebase.
 
@@ -28,7 +33,6 @@ Before starting the interview, scan `project-spec/` fill-in files (`project.md`,
 - If **any file has filled content** → summarize what you see (project name, stack, key constraints) and ask:
 
   > **I see project-spec/ already has content — it describes [summary]. Is this your project, or are you starting fresh from the template?**
-
   - **"This is mine"** → proceed to Phase 1 with the "never overwrite filled sections" rule intact.
   - **"Start fresh"** → reset the fill-in files to the TBD templates below, then ask whether to also clear `decisions/` and `design/` contents. Then proceed to Phase 1.
 
@@ -38,6 +42,7 @@ Never touch `project-spec/README.md` — it's structural.
 <summary>TBD templates for reset</summary>
 
 **project.md**:
+
 ```markdown
 # Project
 
@@ -63,6 +68,7 @@ Never touch `project-spec/README.md` — it's structural.
 ```
 
 **constraints.md**:
+
 ```markdown
 # Constraints
 
@@ -73,9 +79,14 @@ Never touch `project-spec/README.md` — it's structural.
 ## Privacy & Data Handling
 
 - PII policy: _TBD_ (what is prohibited in logs)
+
+## Deprecated patterns
+
+- _TBD_ (libraries, approaches, or conventions that agents must not use or replicate)
 ```
 
 **interfaces.md**:
+
 ```markdown
 # Interfaces
 
@@ -83,6 +94,7 @@ Contracts only — signatures, schemas, auth claims. Not implementation.
 ```
 
 **infrastructure.md**:
+
 ```markdown
 # Infrastructure
 
@@ -95,6 +107,7 @@ How the system is deployed and operated.
 ```
 
 **todos.md**:
+
 ```markdown
 # ToDos
 
@@ -125,19 +138,22 @@ Then:
 
 1. Read any documentation the user points to, plus scan the workspace (file types, directory structure, README, existing config).
 2. From what you learn, **determine which `project-spec/` sections are relevant** to this project. Not every project has APIs, UI, data stores, or SLOs — skip what doesn't apply.
-3. Ask **targeted follow-up questions** only for sections that are relevant but still unclear. Group related questions naturally (don't ask one field at a time).
-4. For each `project-spec/` file:
+3. **If the workspace contains substantial existing code**, ask about conventions in one natural question group:
+   - **Deprecated patterns**: What libraries, approaches, or conventions should agents never use or replicate? Record answers in `constraints.md` under `## Deprecated patterns`.
+   - **Reference code**: Are there specific directories or files that represent the current desired conventions? If identified, derive `project-spec/` content primarily from those reference paths. If the user cannot identify reference code, note it as a P1 gap in `todos.md` and proceed with what you can infer.
+4. Ask **targeted follow-up questions** only for sections that are relevant but still unclear. Group related questions naturally (don't ask one field at a time).
+5. For each `project-spec/` file:
    - **Fill** sections you can confidently derive from what you learned.
    - **Ask** about sections that are relevant but ambiguous.
    - **Remove or mark `N/A`** sections that don't apply to this project.
    - Leave `_TBD_` for things the user explicitly doesn't know yet.
-5. **Propose edits** for confirmation before writing. Never overwrite filled sections.
+6. **Propose edits** for confirmation before writing. Never overwrite filled sections.
 
 The goal is a conversation, not a questionnaire. Adapt to what the project actually is.
 
 ### Phase 2 — Instruction file coverage
 
-- Scan the workspace for file types and directory structure.
+- Scan the workspace for file types and directory structure. If Phase 1 identified reference directories, weight those paths when deriving conventions for instruction content.
 - Compare against existing `.github/instructions/*.instructions.md` files.
 - Review `examples/instructions/` for inspiration on structure and tone — but do **not** copy them verbatim.
 - For each file pattern that exists in the workspace but has no scoped instruction file:
