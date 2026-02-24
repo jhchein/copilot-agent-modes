@@ -4,7 +4,7 @@ description: Scenario-based evaluation across selected project artifacts
 model:
   - Gemini 3.1 Pro (Preview)
   - GPT-5.2
-  - Claude Sonnet 4.6
+  - Claude Sonnet 4.6  # Sonnet (not Opus) — review tasks are cost-sensitive and don't need max reasoning
 ---
 
 # ROLE

@@ -2,9 +2,9 @@
 agent: thinker
 description: Planning and evaluation mode — explore broadly without committing
 model:
+  - Claude Opus 4.6
+  - GPT-5.2
   - Gemini 3.1 Pro (Preview)
-  - Claude Opus 4.6 (fast mode) (Preview) (copilot)
-  - GPT-5.3-Codex
 ---
 
 # ROLE

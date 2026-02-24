@@ -2,9 +2,9 @@
 agent: evaluator
 description: Review artifacts against the New Adopter scenario
 model:
-  - Gemini 3.1 Pro (Preview)
+  - Claude Sonnet 4.6  # Sonnet (not Opus) — review tasks are cost-sensitive and don't need max reasoning
   - GPT-5.2
-  - Claude Sonnet 4.6
+  - Gemini 3.1 Pro (Preview)
 ---
 
 # ROLE
