@@ -8,7 +8,7 @@ A prioritized list of open questions and next steps.
 
 ## P1 (next)
 
-- _TBD_
+- Review and operationalize `project-spec/design/agent-skills-design.md`.
 
 ## P2 (later)
 

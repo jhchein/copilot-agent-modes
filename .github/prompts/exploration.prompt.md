@@ -1,5 +1,5 @@
 ---
-agent: agent
+agent: exploration
 description: Exploration mode — generate options, no commitment
 ---
 

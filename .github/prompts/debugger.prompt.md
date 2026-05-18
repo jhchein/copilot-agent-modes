@@ -1,5 +1,5 @@
 ---
-agent: agent
+agent: debugger
 description: Debugging mode — understand first, fix only with proof
 ---
 

@@ -1,5 +1,5 @@
 ---
-agent: agent
+agent: architect
 description: Architecture and structure mode — shape before code
 ---
 
