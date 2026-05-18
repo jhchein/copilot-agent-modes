@@ -92,6 +92,7 @@ Beyond the base modes, the template includes optional patterns you can adopt inc
 
 - **Writing quality** — instruction file + skill for consistent, evidence-based documentation.
 - **Evaluation harness** — persona-based scenario review using the evaluator agent.
+- **Guardrail pattern** — adversarial challenger sub-agent plus prompt wiring for projects that need stronger stress-testing before recommendations.
 - **Project-spec hygiene** — instruction file enforcing `_TBD_` conventions and fact-only content.
 
 `/bootstrap` offers these based on your project context. See `examples/` for reference files and templates.

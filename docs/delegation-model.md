@@ -33,6 +33,8 @@ See `project-spec/decisions/2026-02-24/execution-debugger-subagent-exception.md`
 
 Future subagent exceptions require a decision record and must meet three criteria: high-frequency, non-destructive, and same-direction (no circular delegation).
 
+For an optional example of a second sub-agent exception pattern on planning modes, see `examples/guardrails/`.
+
 ## Design principles
 
 - **Always-on instructions are a constitution**, not a playbook — short, behavioral, every token earns its place.

@@ -2,6 +2,8 @@
 agent: architect
 description: Architecture and structure mode — shape before code
 model:
+  - GPT-5.4
+  - Gemini 3.1 Pro (Preview)
   - Claude Opus 4.6
   - GPT-5.3-Codex
 ---

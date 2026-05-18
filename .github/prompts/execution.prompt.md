@@ -2,6 +2,8 @@
 agent: execution
 description: Execution mode — Implement decisions
 model:
+  - GPT-5.4
+  - Gemini 3.1 Pro (Preview)
   - GPT-5.3-Codex
   - Claude Opus 4.6
 ---
